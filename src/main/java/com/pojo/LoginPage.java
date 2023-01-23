@@ -1,5 +1,8 @@
 package com.pojo;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import org.openqa.selenium.WebElement;
@@ -43,13 +46,23 @@ public class LoginPage extends BaseClass {
 	}
 
 
-	public void login(String username, String password) throws InterruptedException, IOException {
+	public void login(String username, String password) throws InterruptedException, IOException, AWTException {
 		
 Thread.sleep(5000);
 
 
 
 		insertText(getTxtusername(), username);
+		Thread.sleep(2000);
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_CONTROL);
+		r.keyPress(KeyEvent.VK_MINUS);
+		r.keyRelease(KeyEvent.VK_MINUS);
+		r.keyPress(KeyEvent.VK_MINUS);
+		r.keyRelease(KeyEvent.VK_MINUS);
+		r.keyPress(KeyEvent.VK_MINUS);
+		r.keyRelease(KeyEvent.VK_MINUS);
+		r.keyRelease(KeyEvent.VK_CONTROL);
 		Thread.sleep(2000);
 		insertText(getTxtPassword(), password);
 		Thread.sleep(2000);

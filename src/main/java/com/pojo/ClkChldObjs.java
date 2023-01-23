@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -37,9 +38,15 @@ public class ClkChldObjs extends BaseClass{
 		@FindBy(xpath = "//input[@id='lastName']")
 		private WebElement lastName;
 		
-		@FindBy(xpath = "(//button[@class='sc-cQEWDQ sc-cbFrQO khfxZg hasHg'])[1]")
+		@FindBy(xpath = "//button[@class='sc-dwMqWR sc-fOZrBH jiIpqD dBDPlU']")
 		private WebElement saveButton;
 		
+		@FindBy(xpath = "(//span[@class='Button_button__label__1h86U Button_spanStyle__2u_Xo'])[3]")
+		private WebElement continueButton;
+		
+		public WebElement getContinueButton() {
+			return continueButton;
+		}
 		
 	public WebElement getSettingButton() {
 			return settingButton;
@@ -67,14 +74,19 @@ public class ClkChldObjs extends BaseClass{
 
 	public void clkChldObjs() throws InterruptedException, AWTException {
 
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 		clickButton(getSettingButton());
+		Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+
 		clickButton(getProfileThumbNail());
 		Thread.sleep(5000);
 		
 		clickButton(getDropArea());
 		Robot rb = new Robot();
 		rb.delay(2000);
-		StringSelection ss = new StringSelection("C:\\Users\\DCKLP-060\\Desktop\\prompto.png");
+		StringSelection ss = new StringSelection(System.getProperty("user.dir")+"\\src\\test\\resources\\profile.jpg");
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		rb.keyPress(KeyEvent.VK_CONTROL);
 		rb.keyPress(KeyEvent.VK_V);
@@ -83,6 +95,9 @@ public class ClkChldObjs extends BaseClass{
 		rb.keyRelease(KeyEvent.VK_V);
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(5000);
+		clickButton(getContinueButton());
+		Thread.sleep(15000);
 		
 		clickButton(getFirstName());
 		rb.keyPress(KeyEvent.VK_CONTROL);
@@ -91,7 +106,10 @@ public class ClkChldObjs extends BaseClass{
 		rb.keyRelease(KeyEvent.VK_A);
 		rb.keyPress(KeyEvent.VK_BACK_SPACE);
 		rb.keyRelease(KeyEvent.VK_BACK_SPACE);
+	//	JavascriptExecutor js = (JavascriptExecutor) driver;
+	//	js.executeScript("arguments[0].setAttribute('value','Tst')", getFirstName());
 		insertText(getFirstName(), "Tst");
+		Thread.sleep(5000);
 		
 		clickButton(getLastName());
 		rb.keyPress(KeyEvent.VK_CONTROL);
@@ -100,9 +118,11 @@ public class ClkChldObjs extends BaseClass{
 		rb.keyRelease(KeyEvent.VK_A);
 		rb.keyPress(KeyEvent.VK_BACK_SPACE);
 		rb.keyRelease(KeyEvent.VK_BACK_SPACE);
-		insertText(getFirstName(), "321");
-		
+//		js.executeScript("arguments[0].setAttribute('value','321')", getLastName());
+		insertText(getLastName(), "321");
+		Thread.sleep(5000);
 		clickButton(getSaveButton());
+		Thread.sleep(10000);
 		
 				
 	}

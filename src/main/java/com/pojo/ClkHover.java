@@ -1,6 +1,7 @@
 package com.pojo;
 
 import java.awt.AWTException;
+import java.time.Duration;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -21,13 +22,13 @@ public class ClkHover extends BaseClass{
 	private WebElement editThumbnail;
 	
 	
-	@FindBy(xpath = "(//div[@class='sc-ksHpcM bwZhyF'])[1]")
+	@FindBy(xpath = "(//div[@class='sc-gVkuDy lmuuAO'])[1]")
 	private WebElement unitThumbNail;
 	
 	@FindBy(xpath = "//span[normalize-space()='Settings']")
 	private WebElement settingButton;
 	
-	@FindBy(xpath = "(//li[@class='sc-cTAIfT iFKgzA'])[1]")
+	@FindBy(xpath = "//div[@class='react-contextmenu-wrapper']//div//div[1]//div[1]//div[1]//li[1]")
 	private WebElement mediaHover;
 	
 	
@@ -53,7 +54,8 @@ public class ClkHover extends BaseClass{
 
 	public void clkHover() throws AWTException, InterruptedException {
 		
-		
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 		Actions a  = new Actions(driver);
 		a.moveToElement(getEditThumbnail()).build().perform();
 		Thread.sleep(5000);
@@ -62,6 +64,8 @@ public class ClkHover extends BaseClass{
 		a.moveToElement(getSettingButton()).build().perform();
 		Thread.sleep(5000);
 		clickButton(getEditThumbnail());
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 		a.moveToElement(getMediaHover()).build().perform();
 		Thread.sleep(5000);
 		

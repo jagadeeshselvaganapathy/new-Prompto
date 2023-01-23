@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,10 +24,16 @@ public class Archive_Project extends BaseClass{
 	@FindBy(xpath = "//p[@class='sc-dwsnSq fAfTxU']")
 	private WebElement sortTabProjectList;
 	
+	@FindBy(xpath = "(//p[@class='sc-kiIyQV kfPaIT'])[1]")
+	private WebElement projectName;
+	
+	@FindBy(xpath = "//p[normalize-space()='Created date']")
+	private WebElement createdByDate;
+	
 	@FindBy(xpath = "(//div[@class='CardOverlay_hoverBackground__1Rp_v'])[1]")
 	private WebElement openProjectTab;
 	
-	@FindBy(xpath = "//div[@class='sc-lcDUFh MmbNG']//*[name()='svg']")
+	@FindBy(xpath = "//div[@class='sc-hrjYtz fUzfHh']")
 	private WebElement editProject;
 	
 	@FindBy(xpath = "//div[@class='sc-jlRLRk cbTvaY css-2b097c-container']")
@@ -44,7 +51,22 @@ public class Archive_Project extends BaseClass{
 	@FindBy(xpath = "//p[@class='sc-dwsnSq fAfTxU']")
 	private WebElement unitTabSort;
 	
-		
+	@FindBy(xpath = "//p[normalize-space()='Status']")
+	private WebElement status;
+	
+	public WebElement getstatus() {
+		return status;
+	}
+	
+	public WebElement getcreatedByDate() {
+		return createdByDate;
+	}
+	
+	
+	public WebElement getprojectName() {
+		return projectName;
+	}
+	
 	
 	public WebElement getSortTabProjectList() {
 		return sortTabProjectList;
@@ -95,22 +117,36 @@ public class Archive_Project extends BaseClass{
 
 
 	public void dropdown() throws AWTException, InterruptedException {
-		
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 		clickButton(getSortTabProjectList());
-		selectKey(getSortTabProjectList(), "Project name");
-		
-		
-        clickButton(getOpenProjectTab());
-		clickButton(getEditProject());
-		clickButton(getProjectStatus());
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click()", getOngoingStatus());
-		clickButton(getSaveButton());
+		js.executeScript("arguments[0].click()", getprojectName());
+		Thread.sleep(5000);
+		clickButton(getSortTabProjectList());
+		js.executeScript("arguments[0].click()", getcreatedByDate());
 		
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+		js.executeScript("arguments[0].click()",getOpenProjectTab());
+		Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+		clickButton(getEditProject());
+		Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+		clickButton(getProjectStatus());
+		js.executeScript("arguments[0].click()", getOngoingStatus());
+		Thread.sleep(5000);
+		clickButton(getSaveButton());
+		Thread.sleep(10000);
 		
 		clickButton(getUnitTabButton());
+		Thread.sleep(5000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 		clickButton(getUnitTabSort());
-		selectKey(getUnitTabSort(), "Status");
+		Thread.sleep(5000);
+		js.executeScript("arguments[0].click()", getstatus());
+		Thread.sleep(5000);
 				
 	}
 	

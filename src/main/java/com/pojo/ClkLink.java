@@ -3,6 +3,7 @@ package com.pojo;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.time.Duration;
 import java.util.Set;
 
 import org.openqa.selenium.WebElement;
@@ -17,16 +18,16 @@ public class ClkLink extends BaseClass{
 		}
 	
 	
-	@FindBy(xpath = "//span[normalize-space()='Settings']")
+	@FindBy(xpath = "//button[@id='sidebarButton_settings']")
 	private WebElement settingsButton;
 	
 	@FindBy(xpath = "//p[normalize-space()='Team']")
 	private WebElement teambutton;
 
-	@FindBy(xpath = "//a[@class='sc-GwHqw cFREJO']")
+	@FindBy(xpath = "//a[normalize-space()='our FAQ']")
 	private WebElement faqLink;
 	
-	@FindBy(xpath = "//li[@class='kb-header__company-website-link']")
+	@FindBy(xpath = "//li[@class='kb-header__company-website-link']//a[normalize-space()='Login']")
 	private WebElement loginButton;
 	
 	@FindBy(xpath = "//span[normalize-space()='forgot password?']")
@@ -60,11 +61,16 @@ public class ClkLink extends BaseClass{
 
 	public void clkLink() throws AWTException, InterruptedException {
 		
+		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));	
 	clickButton(getSettingsButton());
+	Thread.sleep(5000);
 	
 	clickButton(getTeambutton());
-	
+	Thread.sleep(5000);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 	clickButton(getFaqLink());
+	Thread.sleep(5000);
 	// to get parent window id
 	String par = driver.getWindowHandle();
 	//to get all window id
@@ -76,21 +82,26 @@ public class ClkLink extends BaseClass{
 			
 			
 			clickButton(getLoginButton());
+			Thread.sleep(5000);
 			// to get parent window id
 			String par1 = driver.getWindowHandle();
 			//to get all window id
 			Set<String> all1 = driver.getWindowHandles();
-			for (String x1 : all) {
-				if (!par1.equals(x)) {
-					driver.switchTo().window(x);
-					Thread.sleep(5000);
+			int count = 0;
+			for (String y : all1) {
+				if (count==2) {
+					driver.switchTo().window(y);
+					Thread.sleep(10000);
+					driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 					clickButton(getForgetPassword());
+					Thread.sleep(10000);
 					driver.close();
-				}
+				}count++;
+				driver.switchTo().window(par1);
 			}
 			Thread.sleep(5000);
 			driver.close();
-		}
+		}driver.switchTo().window(par);
 	}
 	Thread.sleep(5000);
 		

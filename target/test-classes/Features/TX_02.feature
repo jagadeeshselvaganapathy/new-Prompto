@@ -46,10 +46,20 @@ Feature: Prompto Portal Testing
   Scenario: validating the Prompto Portal click tab
     When user validate click tab
     Then user logout ninth time
+   
+   Scenario: validating the Prompto Portal click showcase
+    When user validate click showcase
+    Then user logout seventeenth time
+   
+    
 
   Scenario: validating the Prompto Portal click popups
     When user validate click popups
     Then user logout thirth time
+    
+     Scenario: validating the Prompto Portal click sort
+    When user validate click sort
+    Then user logout Eighteenth time
 
   Scenario: validating the Prompto Portal click TextField
     When user validate click TextField
@@ -66,3 +76,7 @@ Feature: Prompto Portal Testing
   Scenario: validating the Prompto Portal click draganddrop
     When user validate click draganddrop
     Then user logout seventh time
+    
+    
+    
+     

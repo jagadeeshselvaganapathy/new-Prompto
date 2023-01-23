@@ -3,6 +3,7 @@ package com.pojo;
 import java.awt.AWTException;
 import java.time.Duration;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,7 +44,7 @@ public class ClkCheckBox extends BaseClass{
 	@FindBy(xpath = "//button[@id='sidebarButton_projects']")
 	private WebElement projectTab;
 	
-	@FindBy(xpath = "(//div[@class='CardOverlay_hoverBackground__1Rp_v'])[3]")
+	@FindBy(xpath = "(//div[@class='CardOverlay_hoverBackground__1Rp_v'])[1]")
 	private WebElement projectOpen;
 	
 	@FindBy(xpath = "//p[normalize-space()='Showcase Editor']")
@@ -58,10 +59,10 @@ public class ClkCheckBox extends BaseClass{
 	@FindBy(xpath = "//p[normalize-space()='USPs']")
 	private WebElement upsTab;
 	
-	@FindBy(xpath = "//span[@class='Button_button__label__1h86U Button_spanStyle__2u_Xo']")
+	@FindBy(xpath = "//div[@class='Toolbar_actionFieldsRight__KOZTF']")
 	private WebElement addNewUps;
 	
-	@FindBy(xpath = "(//div[@class='Checkbox Checkbox_checkbox__2pNqg unchecked'])[1]")
+	@FindBy(xpath = "(//div[@class='Checkbox Checkbox_checkbox__2pNqg checked'])[1]")
 	private WebElement uspCheckBox;
 	
 	@FindBy(xpath = "(//div[@role='checkbox'])[1]")
@@ -152,10 +153,13 @@ public class ClkCheckBox extends BaseClass{
 
 	public void clkCheckBox() throws AWTException, InterruptedException {
 		Thread.sleep(10000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 	clickButton(getSettingTab());
 	Thread.sleep(5000);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 	clickButton(getPortalTab());
-	Thread.sleep(10000);
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+	Thread.sleep(5000);
 	clickButton(getCheckBox());
 	Thread.sleep(5000);
 	clickButton(getUnCheckBox());
@@ -163,14 +167,16 @@ public class ClkCheckBox extends BaseClass{
 	clickButton(getCheckBox2());
 	Thread.sleep(5000);
 	clickButton(getUncheckBox2());
-	Thread.sleep(5000);
-	
+	Thread.sleep(5000);	
 	clickButton(getProjectTab());
-	Thread.sleep(10000);
+	
 //	WebDriverWait w = new WebDriverWait(driver,Duration.ofSeconds(100));
 //	w.until(ExpectedConditions.elementToBeClickable(getProjectOpen()));
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
-	clickButton(getProjectOpen());
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("arguments[0].click()", getProjectOpen());
+	
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
 	Thread.sleep(5000);
 	clickButton(getShowCaseEditor());
 	Thread.sleep(5000);
@@ -182,18 +188,19 @@ public class ClkCheckBox extends BaseClass{
 	Thread.sleep(5000);
 	
 	clickButton(getUpsTab());
-	Thread.sleep(5000);
+	Thread.sleep(15000);
 	clickButton(getAddNewUps());
-	Thread.sleep(5000);
+	
+	Thread.sleep(7000);
 	clickButton(getUspCheckBox());
 	Thread.sleep(5000);
-	clickButton(getUspUncheckBox());
-	Thread.sleep(5000);
+	
 	
 	clickButton(getTurnTableTab());
-	Thread.sleep(5000);
+	Thread.sleep(7000);
 	clickButton(getAddNewTurnTable());
-	Thread.sleep(5000);
+	Thread.sleep(15000);
+	
 	clickButton(getCheckTurnTable());
 	Thread.sleep(5000);
 			

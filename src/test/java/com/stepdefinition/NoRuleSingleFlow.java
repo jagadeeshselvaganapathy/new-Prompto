@@ -33,6 +33,8 @@ import com.pojo.ClkHover;
 import com.pojo.ClkIcons;
 import com.pojo.ClkLink;
 import com.pojo.ClkPopups;
+import com.pojo.ClkShowcase;
+import com.pojo.ClkSort;
 import com.pojo.ClkTab;
 import com.pojo.ClkTextfield;
 import com.pojo.ClkUpload;
@@ -50,8 +52,9 @@ public class NoRuleSingleFlow extends BaseClass {
 	
 
 	@Given("user with valid credentials they login")
-	public void userWithValidCredentialsTheyLogin() throws InterruptedException, IOException {
+	public void userWithValidCredentialsTheyLogin() throws InterruptedException, IOException, AWTException {
 		
+	
 		lanchBrowser();
 		loadUrl(valueFromProperty("url"));
 		Thread.sleep(10000);
@@ -267,6 +270,33 @@ public class NoRuleSingleFlow extends BaseClass {
 			    }
 			    
 			    
+			    
+			    
+
+			    @When("user validate click showcase")
+			    public void userValidateClickShowcase() throws AWTException, InterruptedException {
+			    	
+			    	ClkShowcase c = new ClkShowcase();
+					c.clkShowcase();
+
+			    
+			    
+			    }
+			    
+			    @Then("user logout seventeenth time")
+			    public void userLogoutSeventeenthTime() throws InterruptedException, IOException {
+			    	
+			    	LogoutPage l = new LogoutPage();
+					l.logOut();
+
+			    
+			    
+			    }
+
+
+
+			    
+			    
 			    @When("user validate click popups")
 			    public void userValidateClickPopups() throws InterruptedException, AWTException {
 			    	
@@ -282,6 +312,31 @@ public class NoRuleSingleFlow extends BaseClass {
 //					l.logOut();
 
 			    }
+			    
+			    
+			    
+
+			    @When("user validate click sort")
+			    public void userValidateClickSort() throws AWTException, InterruptedException {
+			    	
+			    	ClkSort c = new ClkSort();
+					c.clkSort();
+
+			    
+			    }
+			    @Then("user logout Eighteenth time")
+			    public void userLogoutEighteenthTime() throws InterruptedException, IOException {
+			    	
+			    	LogoutPage l = new LogoutPage();
+					l.logOut();
+
+			    
+			    }
+
+
+
+			    
+			    
 			    
 			    @When("user validate click TextField")
 			    public void userValidateClickTextField() throws InterruptedException, AWTException {

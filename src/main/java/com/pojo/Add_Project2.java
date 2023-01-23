@@ -27,7 +27,7 @@ public class Add_Project2 extends BaseClass {
 	@FindBy(xpath = "(//div[@class='CardOverlay_hoverBackground__1Rp_v'])[1]")
 	private WebElement openProjectTab;
 	
-	@FindBy(xpath = "//div[@class='sc-lcDUFh MmbNG']//*[name()='svg']")
+	@FindBy(xpath = "//div[@class='sc-hrjYtz fUzfHh']")
 	private WebElement editProject;
 	
 	@FindBy(xpath = "//div[@class='sc-jlRLRk cbTvaY css-2b097c-container']")
@@ -45,10 +45,35 @@ public class Add_Project2 extends BaseClass {
 	@FindBy(xpath = "//button[@id='sidebarButton_portfolio']")
 	private WebElement showCaseThumbnail;
 	
+	@FindBy(xpath = "//div[@class='sc-pQSRh eYDEVP']")
+	private WebElement showCaseSearch;
+	
+	@FindBy(xpath = "//div[@class='sc-pcxhi hdToTx']")
+	private WebElement showCaseProject;
+	
+	@FindBy(xpath = "//input[@id='searchField']")
+	private WebElement searchField;
+	
+	
+	
 	@FindBy(xpath = "//div[@class='sc-ksHpcM bwZhyF']") //units on the thumbnail, for loop for view multiple mouse over actions
 	private WebElement unitThumbnail;
 	
+	
+	public WebElement getshowCaseSearch() {
+		return showCaseSearch;
+	}
+	
+	public WebElement getsearchField() {
+		return searchField;
+	}
+	
+	public WebElement getshowCaseProject() {
+		return showCaseProject;
+	}
+	
 
+	
 	public WebElement getOpenProjectTab() {
 		return openProjectTab;
 	}
@@ -83,18 +108,24 @@ public class Add_Project2 extends BaseClass {
 	
 	public void thumbNail() throws AWTException, InterruptedException {
 
-		clickButton(getOpenProjectTab());
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click()", getOpenProjectTab());
 		
 		clickButton(getEditProject());
 		
 		clickButton(getProjectStatus());
 		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click()", getOngoingStatus());
 		
 		clickButton(getProjectStatus());
 		
 		js.executeScript("arguments[0].click()", getCompleteedStatus());
+		
+		clickButton(getProjectThumbnail());
+		
+		insertText(getsearchField(), "GREEN FRONT");
+		
+		js.executeScript("arguments[0].click()", getOpenProjectTab());
 		
 		clickButton(getProjectThumbnail());
 		
@@ -110,19 +141,20 @@ public class Add_Project2 extends BaseClass {
 			if (!par.equals(x)) {
 				driver.switchTo().window(x);
 				Thread.sleep(5000);
+				insertText(getshowCaseSearch(), "GREEN FRONT");
+				Thread.sleep(5000);
+				clickButton(getshowCaseProject());
+				Thread.sleep(5000);
 				driver.close();
 			}
+			driver.switchTo().window(par);
 		}
 		
 		Thread.sleep(5000);
 		
-		for (int i = 0; i <= 3; i++) {
-			
-			Actions a = new Actions(driver);
-			a.moveToElement(getUnitThumbnail());
-			Thread.sleep(3000);
-			
-		}
+		
+		
+	
 	
 			
 	}	
